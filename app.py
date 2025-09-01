@@ -50,7 +50,8 @@ def submit_contact():
 
 @app.route('/')
 def home():
-    return "Flask API is running."
+    return jsonify({"message": "Backend is running!"})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# --- Entry point ---
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
