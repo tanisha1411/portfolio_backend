@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)  # allows frontend JS to call backend
@@ -9,10 +10,11 @@ CORS(app)  # allows frontend JS to call backend
 # --- DB connection ---
 def get_connection():
     return psycopg2.connect(
-        host="localhost",
-        database="portfolio",
-        user="postgres",
-        password="tia123"
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        port=os.getenv("DB_PORT", 5432)
     )
 
 # --- API route ---
